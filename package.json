@@ -1,0 +1,18 @@
+{
+  "displayName": "VR Builder XR Interaction Component",
+  "name": "co.mindport.builder.xrinteraction",
+  "version": "1.0.0",
+  "unity": "2019.4",
+  "description": "VR Builder default XR interaction framework.",
+  "keywords": [
+    "builder",
+    "vr",
+    "core",
+    "mindport"
+  ],
+  "author": {
+    "name": "MindPort GmbH",
+    "email": "contact@mindport.co",
+    "url" : "https://mindport.co/"
+  }
+}
