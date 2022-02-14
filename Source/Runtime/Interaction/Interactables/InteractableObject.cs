@@ -3,6 +3,7 @@ using VRBuilder.BasicInteraction;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using System;
+using System.Linq;
 
 namespace VRBuilder.XRInteraction
 {
@@ -322,13 +323,14 @@ namespace VRBuilder.XRInteraction
             bool wasTouchable = isTouchable, wasGrabbable = isGrabbable, wasUsable = isUsable;
             isTouchable = isGrabbable = isUsable = false;
 
+            IXRSelectInteractor snapZone = null;
+
             if (selectingSocket != null)
             {
-                SnapZone snapZone = selectingSocket as SnapZone;
-                snapZone?.ForceUnselect();
+                snapZone = selectingSocket;
             }
-            
-            yield return new WaitUntil(() => interactorsHovering.Count == 0 && interactorsSelecting.Count == 0);
+             
+            yield return new WaitUntil(() => interactorsHovering.Count == 0 && interactorsSelecting.Any(i => i != snapZone) == false);           
             
             isTouchable = wasTouchable;
             isGrabbable = wasGrabbable;
