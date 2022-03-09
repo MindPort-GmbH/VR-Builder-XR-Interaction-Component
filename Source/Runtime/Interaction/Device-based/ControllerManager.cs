@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit;
-using Button = InputHelpers.Button;
+using Button = UnityEngine.XR.Interaction.Toolkit.InputHelpers.Button;
 
 namespace VRBuilder.XRInteraction
 {
