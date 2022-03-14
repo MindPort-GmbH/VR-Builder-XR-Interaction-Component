@@ -25,15 +25,15 @@ namespace VRBuilder.XRInteraction
         /// Gets or sets whether <see cref="ShownHighlightObject"/> is shown or not.
         /// </summary>
         public bool ShowHighlightObject { get; set; }
-        
+
         [SerializeField]
         private GameObject shownHighlightObject = null;
-        
+
         /// <inheritdoc />
         public bool IsEmpty => SnappedObject == null;
 
         /// <inheritdoc />
-        public ISnappableProperty SnappedObject => selectTarget == null ? null : selectTarget.GetComponent<ISnappableProperty>();
+        public ISnappableProperty SnappedObject => hasSelection ? interactablesSelected[0].transform.GetComponent<ISnappableProperty>() : null;
 
         /// <inheritdoc />
         public Transform Anchor => attachTransform;
@@ -136,12 +136,24 @@ namespace VRBuilder.XRInteraction
         /// <summary>
         /// Forces the socket interactor to unselect the given target, if it is not null.
         /// </summary>
+        [Obsolete("Use ForceUnselectInteractable instead.")]
         protected XRBaseInteractable ForceUnselectTarget { get; set; }
+
+        /// <summary>
+        /// Forces the socket interactor to unselect the given target, if it is not null.
+        /// </summary>
+        protected IXRSelectInteractable ForceUnselectInteractable { get; set; }
         
         /// <summary>
         /// Forces the socket interactor to select the given target, if it is not null.
         /// </summary>
+        [Obsolete("Use ForceSelectInteractable instead.")]
         protected XRBaseInteractable ForceSelectTarget { get; set; }
+
+        /// <summary>
+        /// Forces the socket interactor to unselect the given target, if it is not null.
+        /// </summary>
+        protected IXRSelectInteractable ForceSelectInteractable { get; set; }
         
         [SerializeField]
         private Mesh previewMesh;
@@ -233,11 +245,11 @@ namespace VRBuilder.XRInteraction
         
         private void OnAttach(SelectEnterEventArgs arguments)
         {
-            XRBaseInteractable interactable = arguments.interactable;
+            IXRSelectInteractable interactable = arguments.interactableObject;
             
             if (interactable != null)
             {
-                Rigidbody rigid = interactable.gameObject.GetComponent<Rigidbody>();
+                Rigidbody rigid = interactable.transform.gameObject.GetComponent<Rigidbody>();
                 tmpCenterOfMass = rigid.centerOfMass;
                 rigid.centerOfMass = Vector3.zero;
             }
@@ -245,11 +257,11 @@ namespace VRBuilder.XRInteraction
         
         private void OnDetach(SelectExitEventArgs arguments)
         {
-            XRBaseInteractable interactable = arguments.interactable;
+            IXRSelectInteractable interactable = arguments.interactableObject;
             
             if (interactable != null)
             {
-                Rigidbody rigid = interactable.gameObject.GetComponent<Rigidbody>();
+                Rigidbody rigid = interactable.transform.gameObject.GetComponent<Rigidbody>();
                 rigid.centerOfMass = tmpCenterOfMass;
             }
         }
@@ -282,7 +294,7 @@ namespace VRBuilder.XRInteraction
         {
             AttachParent();
             
-            if (socketActive && selectTarget == null)
+            if (socketActive && hasSelection == false)
             {
                 DrawHighlightMesh();
             }
@@ -408,14 +420,14 @@ namespace VRBuilder.XRInteraction
 
         private void CheckForReleasedHoverTargets()
         {
-            if (selectTarget != null)
+            if (hasSelection)
             {
                 return;
             }
             
             foreach (XRBaseInteractable target in snapZoneHoverTargets)
             {
-                if (hoverTargets.Contains(target) || target.isSelected)
+                if (interactablesHovered.Contains(target) || target.isSelected)
                 {
                     continue;
                 }
@@ -460,9 +472,9 @@ namespace VRBuilder.XRInteraction
         /// </summary>
         public virtual void ForceUnselect()
         {
-            if (selectTarget != null)
+            if (hasSelection)
             {
-                ForceUnselectTarget = selectTarget;
+                ForceUnselectInteractable = interactablesSelected[0];
             }
         }
 
@@ -470,20 +482,20 @@ namespace VRBuilder.XRInteraction
         /// Unselects any selected interactable object and forces the provided interactable object to be selected if it is selectable.
         /// </summary>
         /// <param name="interactable">Interactable object to be selected.</param>
-        public virtual void ForceSelect(XRBaseInteractable interactable)
+        public virtual void ForceSelect(IXRSelectInteractable interactable)
         {
             ForceUnselect();
 
             if (interactable.IsSelectableBy(this))
             {
-                interactionManager.ForceSelect(this, interactable);
+                interactionManager.SelectEnter(this, interactable);                
                 interactable.transform.SetPositionAndRotation(attachTransform.position, attachTransform.rotation);
-                ForceSelectTarget = interactable;
+                ForceSelectInteractable = interactable;
             }
             else
             {
-                Debug.LogWarning($"Interactable '{interactable.name}' is not selectable by Snap Zone '{name}'. "
-                    + $"(Maybe the Interaction Layer Masks settings are not correct or the interactable object is locked?)", interactable.gameObject);
+                Debug.LogWarning($"Interactable '{interactable.transform.name}' is not selectable by Snap Zone '{name}'. "
+                    + $"(Maybe the Interaction Layer Masks settings are not correct or the interactable object is locked?)", interactable.transform.gameObject);
             }
         }
 
@@ -491,24 +503,24 @@ namespace VRBuilder.XRInteraction
         /// <param name="interactable">Interactable to check.</param>
         /// <returns><c>true</c> if the interactable can be selected this frame.</returns>
         /// <remarks>Adds the functionality of selecting and unselecting specific interactables.</remarks>
-        public override bool CanSelect(XRBaseInteractable interactable)
+        public override bool CanSelect(IXRSelectInteractable interactable)
         {
             // If one specific target should be unselected,
-            if (ForceUnselectTarget == interactable)
+            if (ForceUnselectInteractable == interactable)
             {
-                ForceUnselectTarget = null;
+                ForceUnselectInteractable = null;
                 return false;
             }
             
             // If one specific target should be selected,
-            if (ForceSelectTarget != null)
+            if (ForceSelectInteractable != null)
             {
-                if (ForceSelectTarget != interactable)
+                if (ForceSelectInteractable != interactable)
                 {
                     return false;
                 }
 
-                ForceSelectTarget = null;
+                ForceSelectInteractable = null;
                 return true;
             }
 
@@ -521,7 +533,7 @@ namespace VRBuilder.XRInteraction
             // If one active validator does not allow this to be snapped, return false.
             foreach (Validator validator in validators)
             {
-                if (validator.isActiveAndEnabled && validator.Validate(interactable.gameObject) == false)
+                if (validator.isActiveAndEnabled && validator.Validate(interactable.transform.gameObject) == false)
                 {
                     return false;
                 }
@@ -530,10 +542,16 @@ namespace VRBuilder.XRInteraction
             return true;
         }
 
+        [Obsolete]
+        public override bool CanSelect(XRBaseInteractable interactable)
+        {
+            return CanSelect((IXRSelectInteractable)interactable);
+        }
+
         /// <inheritdoc />
         public bool CanSnap(ISnappableProperty target)
         {
-            XRBaseInteractable interactableObject = target.SceneObject.GameObject.GetComponent<XRBaseInteractable>();
+            IXRSelectInteractable interactableObject = target.SceneObject.GameObject.GetComponent<XRBaseInteractable>();
 
             if (interactableObject == null)
             {

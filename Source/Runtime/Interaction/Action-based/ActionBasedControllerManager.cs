@@ -774,10 +774,7 @@ namespace VRBuilder.XRInteraction
                 return false;
             }
 
-            List<XRBaseInteractable> hoverTargets = new List<XRBaseInteractable>();
-            baseXRInteractor.GetHoverTargets(hoverTargets);
-
-            return hoverTargets.Any() || baseXRInteractor.selectTarget != null;
+            return baseXRInteractor.interactablesHovered.Any() || baseXRInteractor.interactablesSelected.Count != 0;
         }
 
         private InputAction GetInputAction(InputActionReference actionReference)

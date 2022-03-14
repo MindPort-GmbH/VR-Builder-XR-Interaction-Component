@@ -23,7 +23,7 @@ namespace VRBuilder.XRInteraction
         private bool isUsable = true;
         
         private Rigidbody internalRigidbody;
-        private XRSocketInteractor selectingSocket;
+        private XRSocketInteractor selectingSocket;        
 
         /// <summary>
         /// This interactable's rigidbody.
@@ -118,8 +118,7 @@ namespace VRBuilder.XRInteraction
         /// <param name="interactor">Interactor to check for a valid hover state with.</param>
         /// <returns>True if hovering is valid this frame, False if not.</returns>
         /// <remarks>It always returns false when <see cref="IsTouchable"/> is false.</remarks>
-        [Obsolete]
-        public override bool IsHoverableBy(XRBaseInteractor interactor)
+        public override bool IsHoverableBy(IXRHoverInteractor interactor)
         {
             return isTouchable && base.IsHoverableBy(interactor);
         }
@@ -130,10 +129,9 @@ namespace VRBuilder.XRInteraction
         /// <param name="interactor">Interactor to check for a valid selection with.</param>
         /// <returns>True if selection is valid this frame, False if not.</returns>
         /// <remarks>It always returns false when <see cref="IsGrabbable"/> is false.</remarks>
-        [Obsolete]
-        public override bool IsSelectableBy(XRBaseInteractor interactor)
+        public override bool IsSelectableBy(IXRSelectInteractor interactor)
         {
-            if (IsInSocket && interactor == selectingSocket)
+            if (IsInSocket && interactor as XRSocketInteractor == selectingSocket)
             {
                 return true;
             }
@@ -151,9 +149,9 @@ namespace VRBuilder.XRInteraction
             {
                 OnDeactivated(new DeactivateEventArgs
                 {
-                    interactable =  this,
+                    interactableObject = this,
                     interactor = selectingInteractor
-                });
+                }); ;
             }
             
             StartCoroutine(StopInteractingForOneFrame());
@@ -166,14 +164,15 @@ namespace VRBuilder.XRInteraction
         {
             OnActivated(new ActivateEventArgs
             {
-                interactable = this,
+                interactableObject = this,
                 interactor = selectingInteractor
+
             });
         }
 
-        internal void ForceSelectEnter(XRBaseInteractor interactor)
+        internal void ForceSelectEnter(IXRSelectInteractor interactor)
         {
-            interactionManager.ForceSelect(interactor, this);
+            interactionManager.SelectEnter(interactor, this);
         }
 
         /// <summary>
@@ -189,11 +188,11 @@ namespace VRBuilder.XRInteraction
         protected override void OnSelectEntering(SelectEnterEventArgs arguments)
         {
             base.OnSelectEntering(arguments);
-            XRBaseInteractor interactor = arguments.interactor;
+            IXRInteractor interactor = arguments.interactorObject;
 
             if (IsInSocket == false)
             {
-                XRSocketInteractor socket = interactor.GetComponent<XRSocketInteractor>();
+                XRSocketInteractor socket = interactor.transform.GetComponent<XRSocketInteractor>();
 
                 if (socket != null)
                 {
@@ -235,9 +234,9 @@ namespace VRBuilder.XRInteraction
         protected override void OnSelectExiting(SelectExitEventArgs arguments)
         {
             base.OnSelectExiting(arguments);
-            XRBaseInteractor interactor = arguments.interactor;
+            IXRSelectInteractor interactor = arguments.interactorObject;
             
-            if (IsInSocket && interactor == selectingSocket)
+            if (IsInSocket && interactor as XRSocketInteractor == selectingSocket)
             {
                 selectingSocket = null;
             }
@@ -330,7 +329,7 @@ namespace VRBuilder.XRInteraction
                 snapZone?.ForceUnselect();
             }
             
-            yield return new WaitUntil(() => hoveringInteractors.Count == 0 && selectingInteractor == null);
+            yield return new WaitUntil(() => interactorsHovering.Count == 0 && interactorsSelecting.Count == 0);
             
             isTouchable = wasTouchable;
             isGrabbable = wasGrabbable;

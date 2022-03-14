@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Unity.XR.CoreUtils;
+using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
 namespace VRBuilder.XRInteraction
@@ -20,15 +21,15 @@ namespace VRBuilder.XRInteraction
                 return;
             }
             
-            XRRig xrRig = system.xrRig;
+            XROrigin xrOrigin = system.xrOrigin;
             
-            if (xrRig != null)
+            if (xrOrigin != null)
             {
-                Vector3 heightAdjustment = xrRig.rig.transform.up * xrRig.cameraInRigSpaceHeight;
+                Vector3 heightAdjustment = xrOrigin.Origin.transform.up * xrOrigin.CameraInOriginSpaceHeight;
                 Vector3 cameraDestination = destinationPosition + heightAdjustment;
                 
-                xrRig.MatchRigUpCameraForward(destinationRotation * Vector3.up, destinationRotation * Vector3.forward);
-                xrRig.MoveCameraToWorldLocation(cameraDestination);
+                xrOrigin.MatchOriginUpCameraForward(destinationRotation * Vector3.up, destinationRotation * Vector3.forward);
+                xrOrigin.MoveCameraToWorldLocation(cameraDestination);
             }
         }
     }

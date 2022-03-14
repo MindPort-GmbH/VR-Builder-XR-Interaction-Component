@@ -132,17 +132,15 @@ namespace VRBuilder.XRInteraction.Properties
         {
             Interactable.ForceStopInteracting();
                 
-            XRBaseInteractor interactor = Interactable.selectingInteractor;
-
             yield return new WaitUntil(() => Interactable.isHovered == false && Interactable.isSelected == false);
-            
-            if (interactor != null)
+
+            if (Interactable.interactorsSelecting.Count > 0)
             {
-                DirectInteractor directInteractor = (DirectInteractor)interactor;
+                DirectInteractor directInteractor = (DirectInteractor)Interactable.interactorsSelecting[0];
                 directInteractor.AttemptGrab();
 
                 yield return null;
-                
+
                 Interactable.ForceStopInteracting();
             }
         }
