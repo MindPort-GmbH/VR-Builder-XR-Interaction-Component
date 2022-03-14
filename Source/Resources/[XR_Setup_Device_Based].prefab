@@ -1096,7 +1096,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f391ac734d94ea34697b6cde3269f11a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uniqueName: Trainee
+  uniqueName: User
 --- !u!1 &7485168110108878041
 GameObject:
   m_ObjectHideFlags: 0
@@ -1106,7 +1106,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8096380263314292854}
-  - component: {fileID: 1950888392195384575}
+  - component: {fileID: 905097605757131437}
   - component: {fileID: 7978014070406150753}
   - component: {fileID: 8752401143532005191}
   - component: {fileID: 7401476500642806535}
@@ -1133,7 +1133,7 @@ Transform:
   m_Father: {fileID: 1153462130033586318}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1950888392195384575
+--- !u!114 &905097605757131437
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1142,15 +1142,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 7485168110108878041}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7448815bd5148434682b3d931066cd10, type: 3}
+  m_Script: {fileID: 11500000, guid: e0cb9aa70a22847b5925ee5f067c10a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 3361453039085913529}
   m_OriginBaseGameObject: {fileID: 7485168110108878041}
   m_CameraFloorOffsetObject: {fileID: 7978014070532965571}
   m_RequestedTrackingOriginMode: 0
   m_CameraYOffset: 1.36144
-  m_CameraGameObject: {fileID: 6603483820383241204}
 --- !u!114 &7978014070406150753
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1207,7 +1206,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Timeout: 10
-  m_XROrigin: {fileID: 1950888392195384575}
+  m_XROrigin: {fileID: 905097605757131437}
 --- !u!114 &3471543858207503529
 MonoBehaviour:
   m_ObjectHideFlags: 0

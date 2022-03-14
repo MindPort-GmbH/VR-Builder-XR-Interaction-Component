@@ -2,6 +2,7 @@
 using VRBuilder.BasicInteraction;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
+using System;
 
 namespace VRBuilder.XRInteraction
 {
@@ -117,6 +118,7 @@ namespace VRBuilder.XRInteraction
         /// <param name="interactor">Interactor to check for a valid hover state with.</param>
         /// <returns>True if hovering is valid this frame, False if not.</returns>
         /// <remarks>It always returns false when <see cref="IsTouchable"/> is false.</remarks>
+        [Obsolete]
         public override bool IsHoverableBy(XRBaseInteractor interactor)
         {
             return isTouchable && base.IsHoverableBy(interactor);
@@ -128,6 +130,7 @@ namespace VRBuilder.XRInteraction
         /// <param name="interactor">Interactor to check for a valid selection with.</param>
         /// <returns>True if selection is valid this frame, False if not.</returns>
         /// <remarks>It always returns false when <see cref="IsGrabbable"/> is false.</remarks>
+        [Obsolete]
         public override bool IsSelectableBy(XRBaseInteractor interactor)
         {
             if (IsInSocket && interactor == selectingSocket)
