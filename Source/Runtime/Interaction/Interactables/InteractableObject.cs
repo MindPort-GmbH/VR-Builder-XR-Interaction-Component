@@ -90,8 +90,8 @@ namespace VRBuilder.XRInteraction
         {
             base.Reset();
 
-            // Sets the 'interactionLayerMask' to Default in order to not interact with Teleportation or UI rays.
-            interactionLayerMask = 1;
+            // Sets the 'interactionLayerMask' to Default in order to not interact with Teleportation or UI rays.            
+            interactionLayers = 1;
         }
 
         internal void OnTriggerEnter(Collider other)

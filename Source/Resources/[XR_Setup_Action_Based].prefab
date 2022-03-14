@@ -1346,10 +1346,10 @@ MonoBehaviour:
   m_TrackingStateAction:
     m_UseReference: 0
     m_Action:
-      m_Name: 
+      m_Name: Tracking State
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 
+      m_Id: df150c59-acdb-4a44-ae0d-6b7b17b9125b
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -1370,10 +1370,10 @@ MonoBehaviour:
   m_SelectActionValue:
     m_UseReference: 0
     m_Action:
-      m_Name: 
+      m_Name: Select Action Value
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 
+      m_Id: b1d7c618-2863-40eb-94b0-bc55c977ad1f
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -1394,10 +1394,10 @@ MonoBehaviour:
   m_ActivateActionValue:
     m_UseReference: 0
     m_Action:
-      m_Name: 
+      m_Name: Activate Action Value
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 
+      m_Id: 6a145112-f236-49b9-9463-5bc169d5d003
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -1418,10 +1418,10 @@ MonoBehaviour:
   m_UIPressActionValue:
     m_UseReference: 0
     m_Action:
-      m_Name: 
+      m_Name: UI Press Action Value
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 
+      m_Id: 4936da6e-2314-466c-ac19-aa23d9db394b
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -1481,7 +1481,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   m_InteractionLayers:
-    m_Bits: 256
+    m_Bits: 1
   m_AttachTransform: {fileID: 0}
   m_KeepSelectedTargetValid: 1
   m_StartingSelectedInteractable: {fileID: 0}
@@ -1560,7 +1560,7 @@ MonoBehaviour:
   m_SphereCastRadius: 0
   m_RaycastMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 512
   m_RaycastTriggerInteraction: 1
   m_HitClosestOnly: 0
   m_HoverToSelect: 0
@@ -2191,10 +2191,10 @@ MonoBehaviour:
   m_TrackingStateAction:
     m_UseReference: 0
     m_Action:
-      m_Name: 
+      m_Name: Tracking State
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 
+      m_Id: cc4e2ef5-ea43-46d3-b5d9-bb0fd6cf288f
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -2215,10 +2215,10 @@ MonoBehaviour:
   m_SelectActionValue:
     m_UseReference: 0
     m_Action:
-      m_Name: 
+      m_Name: Select Action Value
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 
+      m_Id: 056d5a5d-5859-40a6-9c77-a8c50f2557c3
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -2239,10 +2239,10 @@ MonoBehaviour:
   m_ActivateActionValue:
     m_UseReference: 0
     m_Action:
-      m_Name: 
+      m_Name: Activate Action Value
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 
+      m_Id: 0c708103-b771-4cf9-a58f-f4cd7216526c
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -2263,10 +2263,10 @@ MonoBehaviour:
   m_UIPressActionValue:
     m_UseReference: 0
     m_Action:
-      m_Name: 
+      m_Name: UI Press Action Value
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 
+      m_Id: 820dd6dd-cf7f-42f3-bfef-c218ea683709
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -2326,7 +2326,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   m_InteractionLayers:
-    m_Bits: 256
+    m_Bits: 1
   m_AttachTransform: {fileID: 0}
   m_KeepSelectedTargetValid: 1
   m_StartingSelectedInteractable: {fileID: 0}
@@ -2405,7 +2405,7 @@ MonoBehaviour:
   m_SphereCastRadius: 0
   m_RaycastMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 512
   m_RaycastTriggerInteraction: 1
   m_HitClosestOnly: 0
   m_HoverToSelect: 0
@@ -2707,10 +2707,10 @@ MonoBehaviour:
   m_TrackingStateAction:
     m_UseReference: 0
     m_Action:
-      m_Name: 
+      m_Name: Tracking State
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 
+      m_Id: bff3ff54-e432-4205-8a89-770a756a58f8
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -2731,10 +2731,10 @@ MonoBehaviour:
   m_SelectActionValue:
     m_UseReference: 0
     m_Action:
-      m_Name: 
+      m_Name: Select Action Value
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 
+      m_Id: f93fa1a2-101a-4938-b3bf-d4156f43e4e4
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -2755,10 +2755,10 @@ MonoBehaviour:
   m_ActivateActionValue:
     m_UseReference: 0
     m_Action:
-      m_Name: 
+      m_Name: Activate Action Value
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 
+      m_Id: 0dee0d87-a49c-4317-9281-019ed020b1ce
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -2779,10 +2779,10 @@ MonoBehaviour:
   m_UIPressActionValue:
     m_UseReference: 0
     m_Action:
-      m_Name: 
+      m_Name: UI Press Action Value
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 
+      m_Id: c4f9d43a-7eb7-410a-a5ee-80994233e6e4
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []

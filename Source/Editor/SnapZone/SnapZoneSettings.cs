@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using VRBuilder.XRInteraction;
 using VRBuilder.Core.Runtime.Utils;
+using UnityEngine.XR.Interaction.Toolkit;
 
 namespace VRBuilder.Editor.XRInteraction
 {
@@ -21,7 +22,7 @@ namespace VRBuilder.Editor.XRInteraction
         /// Only Interactables with this LayerMask will interact with this <see cref="VRBuilder.XRInteraction.SnapZone"/>.
         /// </summary>
         [Tooltip("Only Interactables with this LayerMask will interact with this SnapZone.")]
-        public LayerMask InteractionLayerMask = 1;
+        public InteractionLayerMask InteractionLayerMask = 1;
 
         /// <summary>
         /// This color is used as the snap zone highlight color when no object is hovering a <see cref="SnapZone"/>.
@@ -79,7 +80,7 @@ namespace VRBuilder.Editor.XRInteraction
         /// </summary>
         public void ApplySettingsToSnapZone(SnapZone snapZone)
         {
-            snapZone.interactionLayerMask = InteractionLayerMask;
+            snapZone.interactionLayers = InteractionLayerMask;
             snapZone.ShownHighlightObjectColor = HighlightColor;
             snapZone.ValidationMaterial = ValidationMaterial;
             snapZone.InvalidMaterial = InvalidMaterial;

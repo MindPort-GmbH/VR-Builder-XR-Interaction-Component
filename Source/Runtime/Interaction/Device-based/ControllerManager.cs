@@ -144,7 +144,6 @@ namespace VRBuilder.XRInteraction
             /// <summary>
             /// True if the interactor is either touching or grabbing an interactable.
             /// </summary>
-            /// <returns></returns>
             public bool IsInteractorInteracting()
             {
                 if (interactor == null)
@@ -152,10 +151,7 @@ namespace VRBuilder.XRInteraction
                     return false;
                 }
 
-                List<XRBaseInteractable> hoverTargets = new List<XRBaseInteractable>();
-                interactor.GetHoverTargets(hoverTargets);
-
-                return hoverTargets.Any() || interactor.selectTarget != null;
+                return interactor.interactablesHovered.Any() || interactor.hasSelection;
             }
         }
 
