@@ -774,7 +774,7 @@ namespace VRBuilder.XRInteraction
                 return false;
             }
 
-            return baseXRInteractor.interactablesHovered.Any() || baseXRInteractor.interactablesSelected.Count != 0;
+            return baseXRInteractor.interactablesHovered.Any() || baseXRInteractor.hasSelection;
         }
 
         private InputAction GetInputAction(InputActionReference actionReference)
