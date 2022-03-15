@@ -150,8 +150,8 @@ namespace VRBuilder.XRInteraction
                 OnDeactivated(new DeactivateEventArgs
                 {
                     interactableObject = this,
-                    interactor = selectingInteractor
-                }); ;
+                    interactorObject = isSelected ? interactorsSelecting[0] as IXRActivateInteractor : null,
+                });
             }
             
             StartCoroutine(StopInteractingForOneFrame());
@@ -165,8 +165,7 @@ namespace VRBuilder.XRInteraction
             OnActivated(new ActivateEventArgs
             {
                 interactableObject = this,
-                interactor = selectingInteractor
-
+                interactorObject = isSelected ? interactorsSelecting[0] as IXRActivateInteractor : null,
             });
         }
 

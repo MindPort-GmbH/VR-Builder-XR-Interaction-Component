@@ -431,8 +431,9 @@ namespace VRBuilder.XRInteraction
                 {
                     continue;
                 }
-
+#pragma warning disable 618
                 if (CanSelect(target))
+#pragma warning restore
                 {
                     ForceSelect(target);
                     return;
@@ -448,7 +449,9 @@ namespace VRBuilder.XRInteraction
             }
             else if (snapZoneHoverTargets.Count > 0 && showInteractableHoverMeshes)
             {
+#pragma warning disable 618
                 activeMaterial = snapZoneHoverTargets.Any(CanSelect) ? ValidationMaterial : InvalidMaterial;
+#pragma warning restore
             }
             else
             {
