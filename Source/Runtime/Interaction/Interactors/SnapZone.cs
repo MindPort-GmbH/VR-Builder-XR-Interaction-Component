@@ -433,7 +433,7 @@ namespace VRBuilder.XRInteraction
                 }
 #pragma warning disable 618
                 if (CanSelect(target))
-#pragma warning restore
+#pragma warning restore 618
                 {
                     ForceSelect(target);
                     return;
@@ -449,9 +449,7 @@ namespace VRBuilder.XRInteraction
             }
             else if (snapZoneHoverTargets.Count > 0 && showInteractableHoverMeshes)
             {
-#pragma warning disable 618
-                activeMaterial = snapZoneHoverTargets.Any(CanSelect) ? ValidationMaterial : InvalidMaterial;
-#pragma warning restore
+                activeMaterial = snapZoneHoverTargets.Any(IsValidSnapTarget) ? ValidationMaterial : InvalidMaterial;
             }
             else
             {
@@ -508,13 +506,18 @@ namespace VRBuilder.XRInteraction
         /// <remarks>Adds the functionality of selecting and unselecting specific interactables.</remarks>
         public override bool CanSelect(IXRSelectInteractable interactable)
         {
+            return IsValidSnapTarget(interactable) && base.CanSelect(interactable);
+        }
+
+        protected bool IsValidSnapTarget(IXRSelectInteractable interactable)
+        {
             // If one specific target should be unselected,
             if (ForceUnselectInteractable == interactable)
             {
                 ForceUnselectInteractable = null;
                 return false;
             }
-            
+
             // If one specific target should be selected,
             if (ForceSelectInteractable != null)
             {
@@ -527,12 +530,6 @@ namespace VRBuilder.XRInteraction
                 return true;
             }
 
-            // If this object cannot be selected, ignore it.
-            if (base.CanSelect(interactable) == false)
-            {
-                return false;
-            }
-            
             // If one active validator does not allow this to be snapped, return false.
             foreach (Validator validator in validators)
             {
