@@ -54,7 +54,7 @@ namespace VRBuilder.Editor.XRInteraction
         
         private void ConfigureDefaultTeleportationAnchor(TeleportationProperty teleportationAnchor)
         {
-            teleportLayer = InteractionLayerMask.NameToLayer(TeleportLayerName);
+            teleportLayer = LayerMask.NameToLayer(TeleportLayerName);
 
             try
             {

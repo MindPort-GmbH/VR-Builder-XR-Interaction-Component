@@ -51,7 +51,7 @@ namespace VRBuilder.Editor.XRInteraction
             shownHighlightObjectColor = serializedObject.FindProperty("shownHighlightObjectColor");
             
             interactionManager = serializedObject.FindProperty("m_InteractionManager");
-            interactionLayerMask = serializedObject.FindProperty("m_InteractionLayerMask");
+            interactionLayerMask = serializedObject.FindProperty("m_InteractionLayers");
             attachTransform = serializedObject.FindProperty("m_AttachTransform");
             startingSelectedInteractable = serializedObject.FindProperty("m_StartingSelectedInteractable");
 
