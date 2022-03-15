@@ -113,7 +113,7 @@ namespace VRBuilder.Editor.XRInteraction
             onActivateProperty = serializedObject.FindProperty("m_OnActivate");
             onDeactivateProperty = serializedObject.FindProperty("m_OnDeactivate");
             collidersProperty = serializedObject.FindProperty("m_Colliders");
-            interactionLayerMaskProperty = serializedObject.FindProperty("m_InteractionLayerMask");
+            interactionLayerMaskProperty = serializedObject.FindProperty("m_InteractionLayers");
             isTouchableProperty = serializedObject.FindProperty("isTouchable");
             isGrabbableProperty = serializedObject.FindProperty("isGrabbable");
             isUsableProperty = serializedObject.FindProperty("isUsable");

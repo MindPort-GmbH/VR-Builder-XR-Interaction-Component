@@ -701,7 +701,7 @@ namespace VRBuilder.XRInteraction
             // Transition from Select state to Interact state when the interactor has a selectTarget
             FindBaseControllerComponents();
 
-            if (baseXRInteractor.selectTarget != null)
+            if (baseXRInteractor.hasSelection)
             {
                 TransitionState(selectState, interactState);
             }
@@ -728,7 +728,7 @@ namespace VRBuilder.XRInteraction
         private void OnUpdateInteractState()
         {
             // Transition from Interact state to Select state when the base interactor no longer has a select target
-            if (baseXRInteractor.selectTarget == null)
+            if (baseXRInteractor.hasSelection == false)
             {
                 TransitionState(interactState, selectState);
             }
@@ -774,10 +774,7 @@ namespace VRBuilder.XRInteraction
                 return false;
             }
 
-            List<XRBaseInteractable> hoverTargets = new List<XRBaseInteractable>();
-            baseXRInteractor.GetHoverTargets(hoverTargets);
-
-            return hoverTargets.Any() || baseXRInteractor.selectTarget != null;
+            return baseXRInteractor.interactablesHovered.Any() || baseXRInteractor.hasSelection;
         }
 
         private InputAction GetInputAction(InputActionReference actionReference)

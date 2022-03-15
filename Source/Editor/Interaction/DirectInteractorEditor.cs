@@ -86,7 +86,7 @@ namespace VRBuilder.Editor.XRInteraction
         private void OnEnable()
         {
             interactionManager = serializedObject.FindProperty("m_InteractionManager");
-            interactionLayerMask = serializedObject.FindProperty("m_InteractionLayerMask");
+            interactionLayerMask = serializedObject.FindProperty("m_InteractionLayers");
             attachTransform = serializedObject.FindProperty("m_AttachTransform");
             startingSelectedInteractable = serializedObject.FindProperty("m_StartingSelectedInteractable");
             selectActionTrigger = serializedObject.FindProperty("m_SelectActionTrigger");

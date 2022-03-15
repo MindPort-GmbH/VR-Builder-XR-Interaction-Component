@@ -72,12 +72,12 @@ namespace VRBuilder.XRInteraction.Properties
         
         private void HandleSnappedToDropZone(SelectEnterEventArgs arguments)
         {
-            XRBaseInteractor interactor = arguments.interactor;
-            SnappedZone = interactor.GetComponent<SnapZoneProperty>();
+            IXRSelectInteractor interactor = arguments.interactorObject;
+            SnappedZone = interactor.transform.GetComponent<SnapZoneProperty>();
 
             if (SnappedZone == null)
             {
-                Debug.LogWarningFormat("Object '{0}' was snapped to SnapZone '{1}' without SnappableProperty", SceneObject.UniqueName, interactor.gameObject.name);
+                Debug.LogWarningFormat("Object '{0}' was snapped to SnapZone '{1}' without SnappableProperty", SceneObject.UniqueName, interactor.transform.gameObject.name);
                 return;
             }
 

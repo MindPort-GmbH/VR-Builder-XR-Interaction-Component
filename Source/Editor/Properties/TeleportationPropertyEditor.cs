@@ -16,7 +16,7 @@ namespace VRBuilder.Editor.XRInteraction
         private const string AnchorPrefabName = "Anchor";
         private const string ReticlePrefab = "TeleportReticle";
         private const string TeleportLayerName = "XR Teleport";
-        private LayerMask teleportLayer;
+        private InteractionLayerMask teleportLayer;
         private bool isSetup;
 
         private void OnEnable()
@@ -90,7 +90,7 @@ namespace VRBuilder.Editor.XRInteraction
             TeleportationAnchor teleportAnchor = teleportationAnchor.GetComponent<TeleportationAnchor>();
             
             teleportAnchor.teleportAnchorTransform = prefabTransform;
-            teleportAnchor.interactionLayerMask = 1 << teleportLayer;
+            //teleportAnchor.interactionLayers = 1 << teleportLayer;
             teleportAnchor.customReticle = Resources.Load<GameObject>(ReticlePrefab);
             teleportAnchor.matchOrientation = MatchOrientation.TargetUpAndForward;
         }

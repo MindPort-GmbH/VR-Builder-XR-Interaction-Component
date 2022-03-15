@@ -77,8 +77,7 @@ namespace VRBuilder.XRInteraction
         /// <seealso cref="OnSelectEntered(SelectEnterEventArgs)"/>
         protected override void OnSelectEntering(SelectEnterEventArgs arguments)
         {
-            XRBaseInteractable interactable = arguments.interactable;
-            InteractableObject interactableObject = interactable as InteractableObject;
+            InteractableObject interactableObject = arguments.interactableObject as InteractableObject;
             
             if (precisionGrab && interactableObject.attachTransform == null)
             {
@@ -86,11 +85,11 @@ namespace VRBuilder.XRInteraction
                 {
                     case XRBaseInteractable.MovementType.VelocityTracking:
                     case XRBaseInteractable.MovementType.Kinematic:
-                        attachTransform.SetPositionAndRotation(interactable.transform.position, interactable.transform.rotation);
+                        attachTransform.SetPositionAndRotation(interactableObject.transform.position, interactableObject.transform.rotation);
                         break;
                     case XRBaseInteractable.MovementType.Instantaneous:
                         Debug.LogWarning("Precision Grab is currently not compatible with interactable objects with Movement Type configured as Instantaneous.\n"
-                        + $"Please change the Movement Type in {interactable.name}.", interactable);
+                        + $"Please change the Movement Type in {interactableObject.name}.", interactableObject);
                         break;
                 }
             }
