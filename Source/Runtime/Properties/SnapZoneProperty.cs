@@ -151,7 +151,7 @@ namespace VRBuilder.XRInteraction.Properties
         /// </summary>
         protected override void InternalSetLocked(bool lockState)
         {
-            SnapZone.enabled = lockState == false || SnappedObject != null;
+            SnapZone.enabled = lockState == false || (SnappedObject != null && snapZone.IsUnsnapping == false);
         }
     }
 }
