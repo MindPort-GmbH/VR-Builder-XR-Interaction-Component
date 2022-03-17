@@ -77,7 +77,7 @@ namespace VRBuilder.XRInteraction.Properties
 
             if (SnappedZone == null)
             {
-                Debug.LogWarningFormat("Object '{0}' was snapped to SnapZone '{1}' without SnappableProperty", SceneObject.UniqueName, interactor.transform.gameObject.name);
+                // Selector is not a snap zone.
                 return;
             }
 

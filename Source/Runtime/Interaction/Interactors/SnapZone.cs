@@ -154,6 +154,16 @@ namespace VRBuilder.XRInteraction
         /// Forces the socket interactor to unselect the given target, if it is not null.
         /// </summary>
         protected IXRSelectInteractable ForceSelectInteractable { get; set; }
+
+        /// <summary>
+        /// True when an object is about to be snapped to the snapzone.
+        /// </summary>
+        public bool IsSnapping => ForceSelectInteractable != null;
+
+        /// <summary>
+        /// True when an object is about to be unsnapped from the snapzone.
+        /// </summary>
+        public bool IsUnsnapping => ForceUnselectInteractable != null;
         
         [SerializeField]
         private Mesh previewMesh;
@@ -582,6 +592,7 @@ namespace VRBuilder.XRInteraction
             {
                 return false;
             }
+                        
             ForceUnselect();
             return true;
         }
